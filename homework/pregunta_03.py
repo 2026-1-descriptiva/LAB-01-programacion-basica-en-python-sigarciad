@@ -13,5 +13,22 @@ def pregunta_03():
 
     Rta/
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
-
     """
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        counts = {}
+        for line in file:
+            partes = line.strip().split("\t")
+            letter = partes[0]
+            valor = int(partes[1])
+
+            if letter in counts:
+                counts[letter] += valor
+            else:
+                counts[letter] = valor
+
+    return sorted(counts.items())
+
+
+if __name__ == "__main__":
+    print(pregunta_03())

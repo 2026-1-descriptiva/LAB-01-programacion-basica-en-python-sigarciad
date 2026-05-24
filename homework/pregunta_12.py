@@ -15,3 +15,22 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+            data = {}
+            for line in file:
+                parts = line.strip().split("\t")
+                key = parts[0]
+                dict_parts = parts[4].split(",")
+                for item in dict_parts:
+                    _, value = item.split(":")
+                    value = int(value)
+                    if key not in data:
+                        data[key] = value  # Initialize with the first value
+                    else:
+                        data[key] += value  # Accumulate the sum
+
+    result = dict(sorted(data.items()))
+    return result
+    
+if __name__ == "__main__":
+    print(pregunta_12())

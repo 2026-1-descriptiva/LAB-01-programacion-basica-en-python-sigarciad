@@ -24,3 +24,24 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        data = {}
+        for line in file:
+            parts = line.strip().split("\t")
+            dict_parts = parts[4].split(",")
+
+            for item in dict_parts:
+                key, value = item.split(":")
+                value = int(value)
+
+                if key not in data:
+                    data[key] = 1
+                else:
+                    data[key] += 1
+
+        result = dict(sorted(data.items()))
+        return result    # ← √ Correcto
+
+
+if __name__ == "__main__":
+    print(pregunta_09())

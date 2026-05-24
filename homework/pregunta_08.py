@@ -27,3 +27,23 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        data = {}
+        for line in file:
+            parts = line.strip().split("\t")
+            key = int(parts[1])
+            value = parts[0]
+            if key not in data:
+                data[key] = [value]  # Initialize list with the first value
+            else:
+                if value not in data[key]:
+                    data[key].append(value)
+        # Sort each list in the dictionary
+        for _, v in data.items():
+            v.sort()
+
+        result = sorted(data.items())
+    return result
+
+if __name__ == "__main__":
+    print(pregunta_08()) 

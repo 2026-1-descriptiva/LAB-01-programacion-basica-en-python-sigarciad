@@ -26,3 +26,27 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+            data = {}
+            for line in file:
+                parts = line.strip().split("\t")
+                dict_parts = parts[4].split(",")
+
+                for item in dict_parts:
+                    key, value = item.split(":")
+                    value = int(value)
+
+                    if key not in data:
+                        data[key] = [value, value]  # [min, max]
+                    else:
+                        if value < data[key][0]:
+                            data[key][0] = value
+                        if value > data[key][1]:
+                            data[key][1] = value
+
+            result = [(k, v[0], v[1]) for k, v in sorted(data.items())]
+            return result
+
+
+if __name__ == "__main__":
+    print(pregunta_06())

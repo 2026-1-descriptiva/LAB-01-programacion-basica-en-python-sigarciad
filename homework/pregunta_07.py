@@ -25,3 +25,18 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+            data = {}
+            for line in file:
+                parts = line.strip().split("\t")
+                key = int(parts[1])
+                value = parts[0]
+                if key not in data:
+                    data[key] = [value]  # Initialize list with the first value
+                else:
+                    data[key].append(value)
+    result = sorted(data.items())
+    return result
+    
+if __name__ == "__main__":
+    print(pregunta_07())   
